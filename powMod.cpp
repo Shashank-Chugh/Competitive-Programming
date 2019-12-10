@@ -1,4 +1,5 @@
-ll powMod(ll n,ll p,ll m){
+ll powMod(ll n,ll p,ll m)
+{
     ll res=1;
     n%=m;
     while(p){
@@ -8,3 +9,4 @@ ll powMod(ll n,ll p,ll m){
         n = (n*n)%m;
     }
     return res;
+}
