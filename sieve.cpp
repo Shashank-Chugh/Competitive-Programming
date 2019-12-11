@@ -5,24 +5,17 @@ void sieve1(ll*a,ll n) //to get if a no. is prime or not in array
    ll i;
    rep(i,2,n)
    {
-      if(a[i]>1)
+      if(a[i]==0)     //composite
          continue;
       ll j=i*2;       // j=i*i if you dont want composite no. to get checked by all its prime factors
       while(j<n)
       {
-         a[j]++;
+         a[j]=0;      // 0 means composite
          j+=i;
       }
    }
 
-   rep(i,2,n)
-      if(a[i]!=1)
-         a[i]--;
-
-} 
-
-
-
+}   
 
 
 
