@@ -13,3 +13,4 @@ set<int> calculateFactor(int n)
     } 
     return temp;
 } 
+
