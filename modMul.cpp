@@ -1,4 +1,4 @@
-ll modmul(ll a, ll b, ll c)
+ll modMul(ll a, ll b, ll c)
 {   
     a%=c;
 
