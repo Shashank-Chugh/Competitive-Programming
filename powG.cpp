@@ -1,6 +1,21 @@
-ll fun(ll x,ll y)
-{
-  return x*y;
+ll modMul(ll a, ll b, ll c)
+{   
+    a%=c;
+
+    ll ans = 0;
+
+    while(b)
+    {
+        if(b&1)
+        {
+            ans = (ans+a)%c;
+        }
+
+        a = (a+a)%c;
+        b >>= 1;
+    }
+
+    return ans;
 }
 ll powG(ll x,ll y )
 {
@@ -10,10 +25,10 @@ ll powG(ll x,ll y )
 
   ll temp=powG(x,y/2);
 
-  temp = fun(temp,temp);
+  temp = modMul(temp,temp);
 
   if(y&1)
-    temp=fun(temp,x);
-  
+    temp=modMul(temp,x);
+ 
   return temp;
 }
