@@ -1,4 +1,4 @@
-ll modmul(ll a, ll b, ll c)
+ll modMul(ll a, ll b, ll c)
 {   
     a%=c;
 
@@ -23,9 +23,9 @@ ll powMod(ll n,ll p,ll m)
     n%=m;
     while(p){
         if(p&1)
-            res = modmul(res,n,m)%m;
+            res = modMul(res,n,m)%m;
         p=p>>1;
-        n = modmul(n,n,m)%m;
+        n = modMul(n,n,m)%m;
     }
     return res;
 }
