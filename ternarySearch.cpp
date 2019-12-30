@@ -5,6 +5,7 @@ return -1*x*x + 2*x +3;
 
 // greater than log2(p) / log3(p) 
 // pow((2/3),i) <p
+// can change start end acc to interval
 double ts(double start, double end)
 {
     double l = start, r = end;
