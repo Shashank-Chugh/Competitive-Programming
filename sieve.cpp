@@ -21,7 +21,7 @@ void sieve1(ll*a,ll n) //to get if a no. is prime or not in array
 
 vector<ll> sieve2(ll *a,ll n) //to get least prime that divides this no. in array 
 {
-    vector<ll int>v;
+    vector<ll>v;
     fill(a,a+n,0);
     ll i;
     rep(i,2,n)
