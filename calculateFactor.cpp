@@ -1,3 +1,4 @@
+//do n^2(select any two numbers) selection in set returned feasible if n is 1e9
 set<int> calculateFactor(int n) 
 { 
     // Note that this loop runs till square root 
