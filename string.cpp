@@ -1,5 +1,6 @@
 String:
 
+//len of prefix which's also a suffix
 vector<int> prefix_function(string &s) 
 {
 	int n = (int)s.length();
