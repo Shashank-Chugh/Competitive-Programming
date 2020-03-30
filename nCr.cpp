@@ -32,12 +32,14 @@ ll modInverse(ll a,ll m)
 	}
 }
 
-
+//0c0 check
 ll nCr(ll n,ll r) 
 { 
-   // Base case 
-   if (r==0) 
-      return 1; 
+   // Base case  
+  	if(n==0||n<r)
+  		return 0;
+  	if (r==0) 
+    	return 1;	
   
     // Fill factorial array so that we can find all factorial of r, n and n-r 
     ll fac[n+1]; 
