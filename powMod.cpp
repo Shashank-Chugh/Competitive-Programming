@@ -1,6 +1,6 @@
 ll modMul(ll a, ll b, ll c)
 {   
-    a%=c;
+  /*  a%=c;
 
     ll ans = 0;
 
@@ -16,6 +16,8 @@ ll modMul(ll a, ll b, ll c)
     }
 
     return ans;
+    */
+    return (a*b)%c;
 }
 ll powMod(ll n,ll p,ll m)
 {
