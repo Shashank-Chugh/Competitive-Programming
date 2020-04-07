@@ -11,7 +11,7 @@ void build(int*a , int*tree , int s ,int e, int treeNode )
 	build(a,tree,s,mid,2*treeNode);
 	build(a,tree,mid+1,e,2*treeNode+1);
 
-	//Change according to question
+	//to be
 	tree[treeNode]=tree[2*treeNode]+tree[2*treeNode+1];
 }
 
@@ -33,6 +33,7 @@ void update(int*a,int*tree,int s,int e,int treeNode,int pos,int val)
 	else
 		update(a,tree,mid+1,e,2*treeNode+1,pos,val);
 
+	// to be
 	tree[treeNode]=tree[2*treeNode]+tree[2*treeNode+1];
 
 
@@ -41,7 +42,7 @@ void update(int*a,int*tree,int s,int e,int treeNode,int pos,int val)
 int query(int*a,int*tree,int s,int e,int treeNode,int l,int r)
 {
 	if(s>r||e<l)
-		return 0;
+		return 0;         // to be 
 	if(s>=l&&e<=r)
 	{
 		return tree[treeNode];
@@ -49,7 +50,7 @@ int query(int*a,int*tree,int s,int e,int treeNode,int l,int r)
 
 	int mid=(s+e)/2;
 
-	
-	return (query(a,tree,s,mid,2*treeNode,l,r) + query(a,tree,mid+1,e,2*treeNode+1,l,r));
+	// to be
+	return (query(a,tree,s,mid,2*treeNode,l,r) + query(a,tree,mid+1,e,2*treeNode+1,l,r)); 
 
 }
