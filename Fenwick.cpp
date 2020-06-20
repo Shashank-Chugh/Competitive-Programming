@@ -1,6 +1,6 @@
 // prefix with queries
 //1D BIT:
-
+// 1 based indexing like dsu
 int bit[N];
 
 void update(int idx, int val)
