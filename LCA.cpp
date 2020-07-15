@@ -1,68 +1,65 @@
-int tim=0;
-int parent[LG][N];
-int tin[N], tout[N], level[N];
+struct LCA {
+    vector<int> height, euler, first, segtree;
+    vector<bool> visited;
+    int n;
 
-void dfs(int k, int par, int lvl)
-{
-	tin[k]=++tim;
-	parent[0][k]=par;
-	level[k]=lvl;
-	for(auto it:g[k])
-	{
-		if(it==par)
-			continue;
-		dfs(it, k, lvl+1);
-	}
-	tout[k]=tim;
-}
+    LCA(vector<vector<int>> &adj, int root = 0) {
+        n = adj.size();
+        height.resize(n);
+        first.resize(n);
+        euler.reserve(n * 2);
+        visited.assign(n, false);
+        dfs(adj, root);
+        int m = euler.size();
+        segtree.resize(m * 4);
+        build(1, 0, m - 1);
+    }
 
-int walk(int u, int h)
-{
-	for(int i=LG-1;i>=0;i--)
-	{
-		if((h>>i) & 1)
-			u = parent[i][u];
-	}
-	return u;
-}
+    void dfs(vector<vector<int>> &adj, int node, int h = 0) {
+        visited[node] = true;
+        height[node] = h;
+        first[node] = euler.size();
+        euler.push_back(node);
+        for (auto to : adj[node]) {
+            if (!visited[to]) {
+                dfs(adj, to, h + 1);
+                euler.push_back(node);
+            }
+        }
+    }
 
-void precompute()
-{
-	for(int i=1;i<LG;i++)
-		for(int j=1;j<=n;j++)
-			if(parent[i-1][j])
-				parent[i][j]=parent[i-1][parent[i-1][j]];
-}
+    void build(int node, int b, int e) {
+        if (b == e) {
+            segtree[node] = euler[b];
+        } else {
+            int mid = (b + e) / 2;
+            build(node << 1, b, mid);
+            build(node << 1 | 1, mid + 1, e);
+            int l = segtree[node << 1], r = segtree[node << 1 | 1];
+            segtree[node] = (height[l] < height[r]) ? l : r;
+        }
+    }
 
-int LCA(int u, int v)
-{
-	if(level[u]<level[v])
-		swap(u,v);
-	int diff=level[u]-level[v];
-	for(int i=LG-1;i>=0;i--)
-	{
-		if((1<<i) & diff)
-		{
-			u=parent[i][u];
-		}
-	}
-	if(u==v)
-		return u;
-	for(int i=LG-1;i>=0;i--)
-	{
-		if(parent[i][u] && parent[i][u]!=parent[i][v])
-		{
-			u=parent[i][u];
-			v=parent[i][v];
-		}
-	}
-	return parent[0][u];
-}
+    int query(int node, int b, int e, int L, int R) {
+        if (b > R || e < L)
+            return -1;
+        if (b >= L && e <= R)
+            return segtree[node];
+        int mid = (b + e) >> 1;
 
-int dist(int u, int v)
-{
-	return level[u] + level[v] - 2 * level[LCA(u, v)];
-}
+        int left = query(node << 1, b, mid, L, R);
+        int right = query(node << 1 | 1, mid + 1, e, L, R);
+        if (left == -1) return right;
+        if (right == -1) return left;
+        return height[left] < height[right] ? left : right;
+    }
 
+    int lca(int u, int v) {
+        int left = first[u], right = first[v];
+        if (left > right)
+            swap(left, right);
+        return query(1, 0, euler.size() - 1, left, right);
+    }
+};
 //Problem 1 (Dynamic Diameter): https://codeforces.com/problemset/problem/379/F
 //Solution 1: https://codeforces.com/contest/379/submission/45960185
